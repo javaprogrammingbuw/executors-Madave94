@@ -3,19 +3,21 @@ package executors;
 import org.junit.Test;
 
 //import static org.junit.Assert.assertArrayEquals;
+import java.util.concurrent.ExecutionException;
+
 import static org.junit.Assert.assertEquals;
 
-public class TestTask1 {
+public class TestTask1  {
 
     @Test
-    public void testSmallArray() {
+    public void testSmallArray() throws InterruptedException, ExecutionException {
         int[] arr = {1,5,10,7,8,4,12,9,5,6};
         int result = new Task1().quickSum(arr);
         assertEquals(67, result);
     }
 
     @Test
-    public void testLargeArray() {
+    public void testLargeArray() throws InterruptedException, ExecutionException{
         int[] arr = {1555, -32143214, 3412412, -75985, 483254, 243198, -13034,
                 1240, 12304, -825064, 34214, 98703, -209476, 42945, 42848, -428484,
                 -1248341, 431242, 757550, 1019850, 421045876, -428944, -13209986,
