@@ -18,11 +18,13 @@ public class Task1 {
 
         ExecutorService executorService = Executors.newFixedThreadPool(2);
 
-        Callable<Integer> c = new SimpleSumCallable( arr );
-        Future<Integer> result1 = executorService.submit( c );
+        Callable<Integer> c1 = new SimpleSumCallable( partArray(arr, 0, arr.length/2) );
+        Callable<Integer> c2 = new SimpleSumCallable( partArray(arr, arr.length/2+1, arr.length-1 ) );
+        Future<Integer> result1 = executorService.submit( c1 );
+        Future<Integer> result2 = executorService.submit( c2 );
 
         try {
-            sum = result1.get();
+            sum = result1.get() + result2.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -30,6 +32,16 @@ public class Task1 {
         }
 
         return sum;
+    }
+
+    int[] partArray(int[] arr, int start, int end) {
+        int[] newArr = new int[end-start+1];
+
+        for (int i=0; i<newArr.length; i++) {
+            newArr[i] = arr[start+i];
+        }
+
+        return newArr;
     }
 
     class SimpleSumCallable implements Callable {
